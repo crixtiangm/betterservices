@@ -87,4 +87,4 @@ const formForgotPassword = (req, res) => {
     })
 }
 
-module.exports = { formLogin, formSignup, sendSignup, formForgotPassword}
+module.exports = { formLogin, formSignup, sendSignup, formForgotPassword }
