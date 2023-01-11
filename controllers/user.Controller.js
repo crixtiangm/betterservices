@@ -17,12 +17,12 @@ const formSignup = (req, res) => {
     })
 }
 
-const sendSingup = async (req, res) => {
-    const { yourname,yoursurname,youremail,yourpassword,repeatpassword, ...restRegistro } = req.body;
+const sendSignup = async (req, res) => {
+    const { yourname,yoursurname,email,yourpassword,repeatpassword, ...restRegistro } = req.body;
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){12,30}$/;
     await check('yourname').notEmpty().withMessage('El campo de nombre es obligatorio').run(req); //Se utiliza para validacion de campos importando el modulo de express-validator
     await check('yoursurname').notEmpty().withMessage('El campo de apellido es obligatorio').run(req);
-    await check('youremail').isEmail().withMessage('Eso no parece un email').run(req);
+    await check('email').isEmail().withMessage('Eso no parece un email').run(req);
     await check('yourpassword').isLength({ min:12 }).withMessage('El password debe contener al menos 12 caracteres').run(req);
     await check('yourpassword').matches(regex).withMessage('El password debe contener una mayuscula, una minuscula, un número y un caracter especial "$#@!"').run(req);
     await check('repeatpassword').equals(yourpassword).withMessage('Los passwords no son iguales').run(req);
@@ -35,20 +35,21 @@ const sendSingup = async (req, res) => {
             usuario:{
                 yourname: yourname,
                 yoursurname: yoursurname,
-                youremail: youremail
+                email: email
             }
         })
     }
-
-    const existeUsuario = await User.findOne({youremail});
+    
+    const existeUsuario = await User.findOne({email})
     if(existeUsuario){
+        console.log(email)
         return res.render('auth/signup',{
             pagina: 'Sign Up',
             errores: [{ msg: 'El usuario ya esta registrado' }],
             usuario:{
                 yourname: yourname,
                 yoursurname: yoursurname,
-                youremail: youremail
+                email: email
             }
         })
     }
@@ -58,10 +59,10 @@ const sendSingup = async (req, res) => {
     const passwordHashed = bcrypt.hashSync(yourpassword,salt);
 
     const user = await User.create({
-        name: yourname,
-        surname: yoursurname,
-        email: youremail,
-        password: passwordHashed
+        name:yourname,
+        surname:yoursurname,
+        email,
+        password:passwordHashed
     })
 
     if(!user){
@@ -86,4 +87,4 @@ const formForgotPassword = (req, res) => {
     })
 }
 
-module.exports = { formLogin, formSignup, sendSingup, formForgotPassword}
+module.exports = { formLogin, formSignup, sendSignup, formForgotPassword}

@@ -1,5 +1,5 @@
 const express = require("express");
-const {formLogin, formSignup, sendSingup, formForgotPassword} = require('../controllers/user.Controller.js');
+const {formLogin, formSignup, sendSignup, formForgotPassword} = require('../controllers/user.Controller.js');
 const router = express.Router();
 
 // ℹ️ Handles password encryption
@@ -20,11 +20,11 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 router.get("/signup", isLoggedOut, formSignup);
 
 // POST /auth/signup
-router.post("/signup", isLoggedOut, sendSingup)
+router.post("/signup", isLoggedOut, sendSignup);
 
 // GET /auth/login
 router.get("/login", isLoggedOut, formLogin);
-
+/*
 // POST /auth/login
 router.post("/login", isLoggedOut, (req, res, next) => {
   const { username, email, password } = req.body;
@@ -79,7 +79,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
     })
     .catch((err) => next(err));
-});
+});*/
 
 //GET /auth/forgot-password
 router.get('/forgot-password',isLoggedOut, formForgotPassword)
