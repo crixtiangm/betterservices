@@ -56,7 +56,7 @@ const sendLogin = async (req,res) => {
 
     return res.cookie('_token', token, {
         httpOnly:true
-    }).redirect('/')
+    }).redirect('/admin')
 }
 
 const formSignup = (req, res) => {

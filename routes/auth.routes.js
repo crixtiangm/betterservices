@@ -25,7 +25,7 @@ router.post("/login", isLoggedOut, sendLogin);
 router.get('/forgot-password',isLoggedOut, formForgotPassword)
 
 // GET /auth/logout
-router.get("/logout", isLoggedIn, (req, res) => {
+router.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       res.status(500).render("auth/logout", { errorMessage: err.message });
