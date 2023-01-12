@@ -13,12 +13,18 @@
         />
       </div>
       <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0 max-w-md">
-        <form>
+        <form method="POST" action="/auth/login">
           <div class="">
             <h1 class="text-4xl my-5 font-extrabold text-center">Better<span class="font-normal text-blue-500">Service</span></h1>
             <h2 class="text-center text-2xl font-extrabold">{{pagina}}</h2>
           </div>
-
+          {{#if errores}}
+              <div class="max-w-md mx-auto my-10">
+                  {{#each errores}}
+                  <p class="bg-red-600 text-white uppercase text-xs text-center p-2 mb-1 font-bold">{{this.msg}}</p>
+                  {{/each}}
+              </div>
+          {{/if}}
           <div
             class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
           >
@@ -28,6 +34,7 @@
           <div class="mb-6">
             <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="email">Email</label>
             <input
+              name="emailLogin"
               type="text"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="email"
@@ -39,6 +46,7 @@
           <div class="mb-6">
             <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="password">Password</label>
             <input
+              name="passwordlogin"
               type="password"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="password"

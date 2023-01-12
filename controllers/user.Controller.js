@@ -1,5 +1,6 @@
 const { check,validationResult } = require('express-validator');
 const User = require('../models/User.model.js');
+const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
@@ -9,6 +10,53 @@ const formLogin = (req, res) => {
     res.render('auth/login',{
         pagina: 'Log In'
     })
+}
+
+const sendLogin = async (req,res) => {
+    const { emailLogin, passwordlogin } = req.body;
+    //Validamos los campos de email y password en login
+    await check('emailLogin').isEmail().withMessage('El Email es obligatorio').run(req);
+    await check('passwordlogin').notEmpty().withMessage('El campo de Password es obligatorio').run(req);
+    let resultado = validationResult(req);
+
+    //Validamos el resultado
+    if(!resultado.isEmpty()){
+        return res.render('auth/login', {
+            pagina: 'Log In',
+            errores: resultado.array()//Se mandan los errores como array 
+        })
+    }
+
+    //Validamos si el usuario existe
+    const user = await User.findOne({email:emailLogin})
+    if(!user){
+        return res.render('auth/login', {
+            pagina: 'Log In',
+            errores: [{msg:'El usuario no existe'}] 
+        })
+    }
+
+    //Validamos el Password
+    let isTheSame = bcrypt.compareSync(passwordlogin,user.password)
+    if(!isTheSame){
+        return res.render('auth/login', {
+            pagina: 'Log In',
+            errores: [{msg:'El password es incorrecto'}]
+        })
+    }
+
+    //Autenticamos al usuario
+    const token = jwt.sign({
+        id: user.id,
+        name: user.name,
+        email: user.email
+    }, process.env.SESSION_SECRET, {expiresIn: '1d'})
+
+    //Almacenar en un cookie
+
+    return res.cookie('_token', token, {
+        httpOnly:true
+    }).redirect('/')
 }
 
 const formSignup = (req, res) => {
@@ -87,4 +135,4 @@ const formForgotPassword = (req, res) => {
     })
 }
 
-module.exports = { formLogin, formSignup, sendSignup, formForgotPassword }
+module.exports = { formLogin, sendLogin, formSignup, sendSignup, formForgotPassword }
