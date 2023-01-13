@@ -1,5 +1,5 @@
 const express = require("express");
-const {formLogin, sendLogin, formSignup, sendSignup, formForgotPassword} = require('../controllers/user.Controller.js');
+const {formLogin, sendLogin, formSignup, sendSignup, formForgotPassword} = require('../controllers/auth.Controller.js');
 const router = express.Router();
 
 // Require the User model in order to interact with the database

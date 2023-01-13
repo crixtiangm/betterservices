@@ -1,4 +1,3 @@
-
 <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
@@ -9,8 +8,8 @@
         <!-- logo -->
         <div class="flex items-center space-x-2">
             <button type="button" class="text-3xl" @click="asideOpen = !asideOpen"><i class="bx bx-menu"></i></button>
-            <div class="py-5">
-  <h1 class="text-4xl my-5 font-extrabold text-center">Better<span class="font-normal text-blue-500">Service</span></h1>
+        <div class="py-5">
+    <h1 class="text-4xl my-5 font-extrabold text-center">Better<span class="font-normal text-blue-500">Service</span></h1>
 </div>
         </div>
 
@@ -60,39 +59,12 @@
                 <span class="text-2xl"><i class="bx bx-home"></i></span>
                 <span>Home</span>
             </a>
-
-            <a href="#" class="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600">
-                <span class="text-2xl"><i class="bx bx-user"></i></span>
-                <span>Users</span>
-            </a>
         </aside>
 
         <!-- main content page -->
         <div class="w-full p-4">
-            <h1>Lista de usuarios solo para admin</h1>
+            <h1>Contenido Home de usuarios mortales</h1>
 
-      <table>
-        <thead>
-          <tr>
-              <th>Username</th>
-              <th>email</th>
-              <th>role</th>
-              <th>password</th>
-          </tr>
-        </thead>
-
-        <tbody>
-            {{#each users}}
-            <tr>
-                <td>{{username}}</td>
-                <td>{{email}}</td>
-                <td>{{role}}</td>
-                <td>{{password}}</td>
-            </tr>
-            {{/each}}   
-          
-        </tbody>
-      </table>
     </div>
 </div>
 
