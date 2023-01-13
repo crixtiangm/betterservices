@@ -25,8 +25,11 @@ const projectName = "betterservice";
 app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 
 // 👇 Start handling routes here
-const indexRoutes = require("./routes/index.routes");
-app.use("/", indexRoutes);
+const adminRoutes = require("./routes/admin.routes");
+app.use("/", adminRoutes);
+
+const userRoutes = require("./routes/user.routes");
+app.use("/user", userRoutes);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
