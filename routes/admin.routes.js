@@ -4,6 +4,6 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 const router = express.Router();
 
 /* GET home page */
-router.get("/",isLoggedIn, admin);
+router.get("/", isLoggedIn, admin);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const express = require("express");
-const {formLogin, sendLogin, formSignup, sendSignup, formForgotPassword} = require('../controllers/auth.Controller.js');
+const {formLogin, sendLogin, logOut, formSignup, sendSignup, formForgotPassword} = require('../controllers/auth.Controller.js');
 const router = express.Router();
 
 // Require the User model in order to interact with the database
@@ -21,19 +21,10 @@ router.get("/login", isLoggedOut, formLogin);
 // POST /auth/login
 router.post("/login", isLoggedOut, sendLogin);
 
+//POST Cerrar Sesion
+router.post('/log-out', logOut)
+
 //GET /auth/forgot-password
 router.get('/forgot-password',isLoggedOut, formForgotPassword)
-
-// GET /auth/logout
-router.get("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      res.status(500).render("auth/logout", { errorMessage: err.message });
-      return;
-    }
-
-    res.redirect("/");
-  });
-});
 
 module.exports = router;

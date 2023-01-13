@@ -50,7 +50,7 @@ const sendLogin = async (req,res) => {
         id: user.id,
         name: user.name,
         email: user.email
-    }, process.env.SESSION_SECRET, {expiresIn: 60})
+    }, process.env.SESSION_SECRET, {expiresIn: '1d'})
 
     //Almacenar en un cookie
     if(user.role === 'Admin'){
@@ -68,6 +68,10 @@ const formSignup = (req, res) => {
     res.render('auth/signup', {
         pagina: 'Sign Up'
     })
+}
+
+const logOut = (req, res) => {
+    return res.clearCookie('_token').status(200).redirect('/auth/login')
 }
 
 const sendSignup = async (req, res) => {
@@ -140,4 +144,4 @@ const formForgotPassword = (req, res) => {
     })
 }
 
-module.exports = { formLogin, sendLogin, formSignup, sendSignup, formForgotPassword }
+module.exports = { formLogin, sendLogin, logOut, formSignup, sendSignup, formForgotPassword }
