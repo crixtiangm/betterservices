@@ -1,8 +1,8 @@
 
 
 const admin = (req, res) => {
-    res.render('servc/admin',{
-        pagina:'Services'
+    res.render('admin/home',{
+        pagina: 'Home'
     })
 }
 

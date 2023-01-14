@@ -1,0 +1,114 @@
+<script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
+
+<!-- page -->
+<div class="min-h-screen w-full bg-gray-100 text-gray-700 pb-0 pt-0" x-data="layout">
+    <!-- header page -->
+    <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
+        <!-- logo -->
+        <div class="flex items-center space-x-2">
+            <button type="button" class="text-3xl" @click="asideOpen = !asideOpen"><i class="bx bx-menu"></i></button>
+            <div class="py-5">
+                <h1 class="text-4xl my-5 font-extrabold text-center">Better<span
+                        class="font-normal text-blue-500">Service</span></h1>
+            </div>
+        </div>
+
+        <!-- button profile -->
+        <div>
+            <button type="button" @click="profileOpen = !profileOpen" @click.outside="profileOpen = false"
+                class="h-9 w-9 overflow-hidden rounded-full">
+                <img src="https://images.freeimages.com/images/large-previews/c1d/cute-mao-1640767.jpg"
+                    alt="plchldr.co" />
+            </button>
+
+            <!-- dropdown profile -->
+            <div class="absolute right-2 mt-1 w-48 divide-y divide-gray-200 rounded-md border border-gray-200 bg-white shadow-md"
+                x-show="profileOpen" x-transition>
+                <div class="flex items-center space-x-2 p-2">
+                    <img src="https://images.freeimages.com/images/large-previews/c1d/cute-mao-1640767.jpg"
+                        alt="plchldr.co" class="h-9 w-9 rounded-full" />
+                    <div class="font-medium">{{user.username}}</div>
+                </div>
+
+                <div class="flex flex-col space-y-3 p-2">
+                    <a href="/profile" class="transition hover:text-blue-600">My Profile</a>
+                    <a href="#" class="transition hover:text-blue-600">Edit Profile</a>
+                </div>
+
+                <div class="p-2">
+                    <button class="flex items-center space-x-2 transition hover:text-blue-600">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" href="/auth/logout"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                            </path>
+                        </svg>
+                        <div>
+                            <form action="/auth/log-out" method="POST">
+                                <input class="text-gray-500 text-xs transition hover:text-blue-600" type="submit"
+                                    value="Log Out?">
+                            </form>
+                        </div>
+
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex">
+        <!-- aside -->
+        <aside class="flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2" style="height: 90.5vh"
+            x-show="asideOpen">
+            <a href="/user/home"
+                class="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600">
+                <span class="text-2xl"><i class="bx bx-home"></i></span>
+                <span>Home</span>
+            </a>
+            <a href="user/search"
+                class="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+
+                <span>Search</span>
+            </a>
+            <a href="/user/service"
+                class="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
+                </svg>
+                Service </a>
+
+            <a href="/user/agenda"
+                class="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                </svg>Agenda </a>
+
+
+
+        </aside>
+
+        <!-- main content page -->
+        <div class="w-full p-4">
+            <h1>Contenido Home de usuarios mortales</h1>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("alpine:init", () => {
+            Alpine.data("layout", () => ({
+                profileOpen: false,
+                asideOpen: true,
+            }));
+        });
+    </script>
