@@ -3,14 +3,10 @@ const { Schema, model } = require("mongoose");
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
-    name: {
+    username: {
       type: String,
-      required: true,
-      trim: true,
-    },
-    surname: {
-      type: String,
-      required: true,
+      required: false,
+      unique: true,
       trim: true,
     },
     email: {
@@ -24,15 +20,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    role: {
-      type:String,
-      enum:["Admin","User"],
-      default:"User"
-    },
-    status: {
-      type: Boolean,
-      default:true
-    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
