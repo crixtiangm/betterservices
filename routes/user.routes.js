@@ -13,7 +13,7 @@ router.get("/createService",isLoggedIn, (req,res,next) => {
     User.find()
     .then((user) => {
 
-        res.render("user/service/serviceList",{toons}  )
+        res.render("user/service/serviceList",{user}  )
     })
     .catch((error) => next(error))
 });
