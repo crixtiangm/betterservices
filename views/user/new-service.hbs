@@ -1,26 +1,32 @@
-              <!-- main content page -->
-        <div class="py-5 mt-10">
-         
-    <div class="bg-white py-8 px-4 shadow max-w-md">
+<div class="py-2 mt-4">
+  {{#if errores}}
+        <div class="max-w-md mx-auto my-9">
+            {{#each errores}}
+            <p class="bg-red-600 text-white uppercase text-xs text-center p-2 mb-1 font-bold rounded-md">{{this.msg}}</p>
+            {{/each}}
+        </div>
+  {{/if}}
+  <div class="mt-8 mx-auto max-w-md">
+    <div class="bg-white py-8 px-4 shadow">
       <form class="space-y-5" action="/auth/signup" method="POST">
         <div>
           <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="serviceName">Service Name</label>
-          <input id="serviceName" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="text" name="service-name" placeholder="Your Name" value="{{usuario.yourname}}" />
+          <input id="serviceName" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="text" name="service-name" placeholder="Name your service" value="" />
         </div>
 
         <div>
           <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="serviceDesc">Description</label>
-          <input id="serviceDesc" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="text" name="service-description" placeholder="Your Surname" value="{{usuario.yoursurname}}" />
+          <input id="serviceDesc" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="text" name="service-description" placeholder="What kind of service you provide?" value="" />
         </div>
 
         <div>
           <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="serviceImage">Images</label>
-          <input id="serviceImage" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="email" name="service-image" placeholder="Email" value="{{usuario.email}}" />
+          <input id="serviceImage" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="email" name="service-image" placeholder="Add images that could describe your service." value="" />
         </div>
 
         <div>
           <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="serviceAddress">Address</label>
-          <input id="serviceAddress" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="password" name="service-address" placeholder="Your Password" />
+          <input id="serviceAddress" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="password" name="service-address" placeholder="Add were you are located." />
         </div>
 
         <div>
@@ -33,14 +39,8 @@
           <input id="serviceLongitude" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="password" name="service-longitude" placeholder="Address Longitude" />
         </div>        
 
-        <div class="flex items-center justify-between">
-          <a class="text-gray-500 text-xs" href="/auth/login">Do you have a account? Log In</a>
-          <a class="text-gray-500 text-xs" href="/auth/forgot-password">Forgot password?</a>
-        </div>
-
-        <input class="w-full bg-blue-500 hover:bg-blue-700 text-white font-medium py-3 cursor-pointer rounded" type="submit" value="Sign Up">
+        <input class="w-full bg-blue-500 hover:bg-blue-700 text-white font-medium py-3 cursor-pointer rounded" type="submit" value="Register Service">
       </form>
-        </div>
     </div>
-   
-
+  </div>
+</div>

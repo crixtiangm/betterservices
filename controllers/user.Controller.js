@@ -14,7 +14,15 @@ const userNewService = (req, res) => {
    } ) 
 };
 
+const userSearch = (req, res) => {
+
+    res.render('user/search',{ 
+     pagina: 'Search'
+    } ) 
+ };
+
 module.exports = { 
     userHome,
-    userNewService
+    userNewService,
+    userSearch
 }
