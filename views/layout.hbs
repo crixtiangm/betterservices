@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="/stylesheets/app.css">
 </head>
 <body class="min-h-screen bg-gray-50">
-    {{#if header}}
-    <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+    
+
+<script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
 <!-- page -->
@@ -77,7 +78,7 @@
                 <span class="text-2xl"><i class="bx bx-home"></i></span>
                 <span>Home</span>
             </a>
-            <a href="user/search"
+            <a href="/user/search"
                 class="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -87,7 +88,7 @@
 
                 <span>Search</span>
             </a>
-            <a href="/user/service"
+            <a href="/user/new-service"
                 class="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600 ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -110,9 +111,10 @@
 
         <!-- main content page -->
         <div class="w-full p-4">
-            <main class="mx-auto  px-2">
-                {{{body}}}
-            </main>
+               <main class="mx-auto  px-2">
+        {{{body}}}
+    </main>
+
         </div>
     </div>
 
@@ -124,11 +126,8 @@
             }));
         });
     </script>
-    {{else}}
-    <main class="mx-auto  px-2">
-        {{{body}}}
-    </main>
-    {{/if}}
+    
+
     
 </body>
 </html>
