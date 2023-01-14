@@ -6,7 +6,6 @@ const userHome = (req, res) => {
     })
 }
 
-
 module.exports = { 
     userHome 
 }
