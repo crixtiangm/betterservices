@@ -2,7 +2,8 @@
 
 const userHome = (req, res) => {
     res.render('user/home',{
-        pagina: 'Home'
+        pagina: 'Home',
+        header: true
     })
 }
 
