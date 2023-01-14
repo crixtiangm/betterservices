@@ -1,0 +1,46 @@
+              <!-- main content page -->
+        <div class="py-5 mt-10">
+         
+    <div class="bg-white py-8 px-4 shadow max-w-md">
+      <form class="space-y-5" action="/auth/signup" method="POST">
+        <div>
+          <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="serviceName">Service Name</label>
+          <input id="serviceName" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="text" name="service-name" placeholder="Your Name" value="{{usuario.yourname}}" />
+        </div>
+
+        <div>
+          <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="serviceDesc">Description</label>
+          <input id="serviceDesc" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="text" name="service-description" placeholder="Your Surname" value="{{usuario.yoursurname}}" />
+        </div>
+
+        <div>
+          <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="serviceImage">Images</label>
+          <input id="serviceImage" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="email" name="service-image" placeholder="Email" value="{{usuario.email}}" />
+        </div>
+
+        <div>
+          <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="serviceAddress">Address</label>
+          <input id="serviceAddress" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="password" name="service-address" placeholder="Your Password" />
+        </div>
+
+        <div>
+          <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="serviceLatitude">Latitude</label>
+          <input id="serviceLatitude" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="password" name="service-latitude" placeholder="Address Latitude" />
+        </div>
+
+        <div>
+          <label class="block text-md uppercase text-gray-600 mb-2 font-bold" for="service">Longitude</label>
+          <input id="serviceLongitude" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" type="password" name="service-longitude" placeholder="Address Longitude" />
+        </div>        
+
+        <div class="flex items-center justify-between">
+          <a class="text-gray-500 text-xs" href="/auth/login">Do you have a account? Log In</a>
+          <a class="text-gray-500 text-xs" href="/auth/forgot-password">Forgot password?</a>
+        </div>
+
+        <input class="w-full bg-blue-500 hover:bg-blue-700 text-white font-medium py-3 cursor-pointer rounded" type="submit" value="Sign Up">
+      </form>
+        </div>
+    </div>
+   
+
