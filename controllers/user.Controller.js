@@ -10,14 +10,16 @@ const userHome = (req, res) => {
 const userNewService = (req, res) => {
 
    res.render('user/new-service',{ 
-    pagina: 'New Service'
+    pagina: 'New Service',
+    header: true
    } ) 
 };
 
 const userSearch = (req, res) => {
 
     res.render('user/search',{ 
-     pagina: 'Search'
+     pagina: 'Search',
+     header: true
     } ) 
  };
 
