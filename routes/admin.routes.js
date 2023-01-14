@@ -1,9 +1,9 @@
 const express = require('express');
 const { admin } = require('../controllers/admin.Controller.js');
-const isLoggedIn = require("../middleware/isLoggedIn");
+const isLoggedInAdmin = require("../middleware/isLoggedInAdmin");
 const router = express.Router();
 
 /* GET home page */
-router.get("/", isLoggedIn, admin);
+router.get("/", isLoggedInAdmin, admin);
 
 module.exports = router;

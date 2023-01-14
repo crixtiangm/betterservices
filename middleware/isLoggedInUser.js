@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
     const user = await User.findById(decodeJWT.id);
     const {password,status,createdAt,updatedAt,...userRest} = user.toObject();
     // Almacenamos el usuario
-    if(userRest){
+    if(userRest && userRest.role === 'User'){
       req.userRest = userRest
     }else{
       return res.redirect('/auth/login')
@@ -24,4 +24,3 @@ module.exports = async (req, res, next) => {
       return res.clearCookie('_token').redirect('/auth/login');
   }
 };
-
