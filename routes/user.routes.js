@@ -1,11 +1,11 @@
 const express = require('express');
 const { userHome } = require('../controllers/user.Controller.js');
-const isLoggedIn = require("../middleware/isLoggedIn");
+const isLoggedInUser = require("../middleware/isLoggedInUser");
 const router = express.Router();
 const User = require('../models/User.model');
 
 
-router.get("/home",isLoggedIn, userHome);
+router.get("/home",isLoggedInUser, userHome);
 
 
 // Crear servicio
