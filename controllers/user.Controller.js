@@ -7,6 +7,22 @@ const userHome = (req, res) => {
     })
 }
 
+const userNewService = (req, res) => {
+
+   res.render('user/new-service',{ 
+    pagina: 'New Service'
+   } ) 
+};
+
+const userSearch = (req, res) => {
+
+    res.render('user/search',{ 
+     pagina: 'Search'
+    } ) 
+ };
+
 module.exports = { 
-    userHome 
+    userHome,
+    userNewService,
+    userSearch
 }
