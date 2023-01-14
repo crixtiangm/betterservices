@@ -529,9 +529,7 @@ video {
 .mb-auto {
   margin-bottom: auto;
 }
-.ml-2 {
-  margin-left: 0.5rem;
-}
+
 .block {
   display: block;
 }
@@ -540,9 +538,6 @@ video {
 }
 .table {
   display: table;
-}
-.hidden {
-  display: none;
 }
 .h-9 {
   height: 2.25rem;
@@ -555,9 +550,6 @@ video {
 }
 .h-full {
   height: 100%;
-}
-.h-6 {
-  height: 1.5rem;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -657,9 +649,6 @@ video {
 .overflow-hidden {
   overflow: hidden;
 }
-.whitespace-nowrap {
-  white-space: nowrap;
-}
 .rounded-full {
   border-radius: 9999px;
 }
@@ -683,9 +672,6 @@ video {
 }
 .border-solid {
   border-style: solid;
-}
-.border-none {
-  border-style: none;
 }
 .border-gray-200 {
   --tw-border-opacity: 1;
@@ -722,13 +708,6 @@ video {
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-.bg-blue-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
-}
-.bg-transparent {
-  background-color: transparent;
 }
 .bg-clip-padding {
   background-clip: padding-box;
@@ -822,10 +801,6 @@ video {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
 .font-extrabold {
   font-weight: 800;
 }
@@ -843,9 +818,6 @@ video {
 }
 .leading-snug {
   line-height: 1.375;
-}
-.leading-tight {
-  line-height: 1.25;
 }
 .text-gray-700 {
   --tw-text-opacity: 1;
@@ -891,11 +863,6 @@ video {
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-lg {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .transition {

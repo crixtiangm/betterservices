@@ -7,7 +7,7 @@ const User = require("../models/User.model");
 
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
-const isLoggedIn = require("../middleware/isLoggedIn");
+const isLoggedIn = require("../middleware/isLoggedInAdmin");
 
 // GET /auth/signup
 router.get("/signup", isLoggedOut, formSignup);
