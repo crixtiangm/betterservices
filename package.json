@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/app.css --watch"
+    "css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/app.css --watch",
+    "js": "webpack --watch"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -26,6 +27,8 @@
     "nodemon": "^2.0.20",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   }
 }
