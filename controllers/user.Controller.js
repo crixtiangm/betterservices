@@ -3,7 +3,7 @@
 const userHome = (req, res) => {
     res.render('user/home',{
         pagina: 'Home',
-        header: true
+        dataUser: req.userRest
     })
 }
 
@@ -11,7 +11,7 @@ const userNewService = (req, res) => {
 
    res.render('user/new-service',{ 
     pagina: 'New Service',
-    header: true
+    dataUser: req.userRest
    } ) 
 };
 
@@ -19,7 +19,7 @@ const userSearch = (req, res) => {
 
     res.render('user/search',{ 
      pagina: 'Search',
-     header: true
+     dataUser: req.userRest
     } ) 
  };
 
