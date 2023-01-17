@@ -1,4 +1,12 @@
+const Service = require ('../models/Service.model')
 
+const userProfile = (req, res, next) => {
+    res.render('user/profile', {
+        pagina:'Profile',
+        dataUser: req.userRest
+    });
+
+};
 
 const userHome = (req, res) => {
     res.render('user/home',{
@@ -15,7 +23,22 @@ const userNewService = (req, res) => {
    } ) 
 };
 
-const userSearch = (req, res) => {
+const userPostNewService = async(req, res,next) => {
+    try {
+        const {serviceName,serviceDescription,serviceImage,serviceAddress,serviceLatitude,serviceLongitude} = req.body;
+        await Service.create({name: serviceName, description: serviceDescription, image: serviceImage,address:serviceAddress, latitude: serviceLatitude, longitude: serviceLongitude,_user: req.userRest._id})
+        res.render("user/new-service",{
+            pagina: 'New Service',
+            dataUser: req.userRest
+        } )
+    } catch (error) {
+        next(error)
+    }
+};
+
+
+
+const userSearch = async(req, res) => {
 
     res.render('user/search',{ 
      pagina: 'Search',
@@ -26,5 +49,7 @@ const userSearch = (req, res) => {
 module.exports = { 
     userHome,
     userNewService,
-    userSearch
+    userSearch,
+    userPostNewService,
+    userProfile
 }
