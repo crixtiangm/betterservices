@@ -50,7 +50,7 @@ const sendLogin = async (req,res) => {
         id: user.id,
         name: user.name,
         email: user.email
-    }, process.env.SESSION_SECRET, {expiresIn: '1d'})
+    }, process.env.SESSION_SECRET, { expiresIn: '1d'})
 
     //Almacenar en un cookie
     if(user.role === 'Admin'){
