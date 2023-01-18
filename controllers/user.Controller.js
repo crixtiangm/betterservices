@@ -8,9 +8,8 @@ const userProfile = async(req, res, next) => {
 
 const userHome = (req, res) => {
     res.render('user/home',{
-        headeruser:true,
         pagina: 'Home',
-        dataUser: req.userRest
+        headeruser:true
     })};
 
 const userNewService = (req, res) => {
@@ -18,21 +17,28 @@ const userNewService = (req, res) => {
     const {name,surname} = req.userRest
    res.render('user/new-service',{ 
     pagina: 'New Service',
-    headeruser: true,
-    dataUser: req.userRest
+    headeruser: true
    } ) 
 };
 
-const userPostNewService = async(req, res,next) => {
+const userPostNewService = async(req, res, next) => {
     try {
         const {serviceName,serviceDescription,serviceImage,serviceAddress,serviceLatitude,serviceLongitude} = req.body;
-        await Service.create({name: serviceName, description: serviceDescription, image: serviceImage,address:serviceAddress, latitude: serviceLatitude, longitude: serviceLongitude,_user: req.userRest._id})
-        console.log(req.body)
+        await Service.create({
+            name: serviceName, 
+            description: serviceDescription, 
+            image: serviceImage,address:serviceAddress, 
+            latitude: serviceLatitude, 
+            longitude: serviceLongitude,
+            _user: req.userRest._id
+        })
+        
         if (Service.create) {
-        res.render("user/home",{
+            res.render("user/home",{
             pagina: 'New Service',
-            dataUser: req.userRest
-        })}
+            headeruser: true
+            })
+        }
     } catch (error) {
         next(error)
     } 

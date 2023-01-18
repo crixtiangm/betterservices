@@ -20,7 +20,7 @@ router.get("/new-service", isLoggedInUser, userNewService);
 
 router.post("/new-service", isLoggedInUser, userPostNewService);
 
-//edit service
+//Edit service
 
 router.get("/edit-service/:id", isLoggedInUser, userEditService);
 

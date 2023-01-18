@@ -1,7 +1,7 @@
 (function() {
     
-    const lat = 19.432757;
-    const lng = -99.1340728;
+    const lat = document.querySelector('#serviceLat').value || 19.432757;
+    const lng = document.querySelector('#serviceLng').value || -99.1340728;
     const mapa = L.map('mapa').setView([lat, lng ], 14);
     
     //Utilizar provider y geocoder
@@ -30,9 +30,9 @@
             marker.bindPopup(result.address.LongLabel)
             //Para Lenar los inputs ocultos con la informcion necesaria
             document.querySelector('.street').textContent = result?.address?.Address ?? '';
-            document.querySelector('#servicestreet').textContent = result?.address?.Address ?? '';
-            document.querySelector('#serviceLat').textContent = result?.latlng?.lat ?? '';
-            document.querySelector('#serviceLng').textContent = result?.latlng?.lng ?? '';
+            document.querySelector('#servicestreet').value = result?.address?.Address ?? '';
+            document.querySelector('#serviceLat').value = result?.latlng?.lat ?? '';
+            document.querySelector('#serviceLng').value = result?.latlng?.lng ?? '';
         })
     })
 
