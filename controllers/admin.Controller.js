@@ -3,10 +3,13 @@ const User = require('../models/User.model.js');
 const Service =  require('../models/Service.model.js');
 
 
-const admin = (req, res) => {
+const admin = async (req, res) => {
+    const allServices = await Service.find();
+    console.log(allServices);
     res.render('admin/home',{
         pagina: 'Home',
-        header: true
+        header: true,
+        allServices
     })
 }
 
