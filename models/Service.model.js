@@ -5,23 +5,20 @@ const serviceSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: true
     },
     description: {
       type: String,
-      required: true,
+      required: true
     },
     images: {
-      type: String
-
+      type: [String]
     },
     address: {
-      type: String,
-      required: true,
+      type: String
     },
     latitude: {
-      type:String,
-
+      type:String
     },
     longitude: {
       type:String

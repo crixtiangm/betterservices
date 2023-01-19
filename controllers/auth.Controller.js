@@ -99,7 +99,6 @@ const sendSignup = async (req, res) => {
     
     const existeUsuario = await User.findOne({email})
     if(existeUsuario){
-        console.log(email)
         return res.render('auth/signup',{
             pagina: 'Sign Up',
             errores: [{ msg: 'El usuario ya esta registrado' }],
