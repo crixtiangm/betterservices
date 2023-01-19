@@ -34,9 +34,10 @@ const adminCreateNewService = async (req, res, next) => {
         })
     }
 
-    const { _id } = req.userRest;
+    const { _id:_user } = req.userRest;
 
-    const existeServicio = await Service.find({_user:_id});
+    const existeServicio = await Service.findOne({_user})
+    console.log(existeServicio)
     if(existeServicio){
         return res.render('admin/service-created',{
             pagina: 'Existing Service',
@@ -45,12 +46,6 @@ const adminCreateNewService = async (req, res, next) => {
             error: true
         })
     }
-        /* uploadImg.array('serviceimage',2)//Middleware para subir imagenes
-        console.log(req.files)
-        return res.json(req.body)
-    if(req.file.length){ 
-
-    }*/
 
     const { 
         servicename,
@@ -68,7 +63,7 @@ const adminCreateNewService = async (req, res, next) => {
             address: streetservice,
             latitude: servicelatitud,
             longitude: servicelongitud,
-            _user: _id,
+            _user,
         })
 
         res.render('admin/service-created',{
