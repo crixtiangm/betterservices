@@ -5,7 +5,6 @@ const Service =  require('../models/Service.model.js');
 
 const admin = async (req, res) => {
     const allServices = await Service.find();
-    console.log(allServices);
     res.render('admin/home',{
         pagina: 'Home',
         header: true,
@@ -40,7 +39,6 @@ const adminCreateNewService = async (req, res, next) => {
     const { _id:_user } = req.userRest;
 
     const existeServicio = await Service.findOne({_user})
-    console.log(existeServicio)
     if(existeServicio){
         return res.render('admin/service-created',{
             pagina: 'Existing Service',
@@ -124,7 +122,7 @@ const adminStorageImageService = async ( req, res, next) => {
         }
 
         res.render('admin/image-update',{
-            pagina: 'Updated Image',
+            pagina: 'Image',
             header: true,
             error: true,
             mensaje: 'You havent created a service yet'
@@ -137,13 +135,110 @@ const adminStorageImageService = async ( req, res, next) => {
 const adminMyService = async ( req, res, next) => {
     const { _id:_user } = req.userRest._id;
     const myService = await Service.findOne({_user})
+        if(myService == null){
+            return res.render('admin/service-not-created', {
+                pagina: 'Not Service',
+                header: true,
+                mensaje: 'You havent created a service yet'
+            })
+        }
         res.render('admin/my-service', {
             pagina: 'My Service',
             header: true,
+            _id: myService._id,
             image: myService.images,
             name: myService.name,
-            description: myService.description
+            description: myService.description,
+            address: myService.address
         })
+}
+
+const adminEditMyService = async ( req, res, next) => {
+    try {
+
+        const { idMyService:_id } = req.params;
+        const datos = await Service.findById({_id});
+        const { name, description, address, latitude, longitude, ...serviceRest} = datos;
+        res.render("admin/edit-my-service", {
+            pagina: 'Edit Service',
+            header: true,
+            _id,
+            name,
+            description,
+            address,
+            latitude,
+            longitude
+        })
+    } catch (error) {
+           console.log(error); 
+    }
+}
+
+const adminSendEditMyService = async ( req, res, next) => {
+    try {
+        const { 
+            servicename: name,
+            servicedescription: description, 
+            streetservice: address, 
+            servicelatitud: latitude,
+            servicelongitud: longitude
+        } = req.body;
+
+        await check('servicename').notEmpty().withMessage('El nombre del servicio es obligatorio').run(req);
+        await check('servicedescription').notEmpty().withMessage('El campo de descripción no puede ir vacio').isLength({max: 200}).withMessage('La descripción es muy larga').run(req);
+        await check('streetservice').notEmpty().withMessage('Es necesario que ingrese la ubicación del servicio en el mapa').run(req);
+
+        let resultado = validationResult(req);
+
+        if(!resultado.isEmpty()){
+            return res.render('admin/edit-my-service', {
+                pagina: 'Edit Service',
+                header: true,
+                errores: resultado.array(),//Se mandan los errores como array 
+                name,
+                description,
+                address,
+                latitude,
+                longitude
+            })
+        }
+
+        const { idMyService:_id } = req.params;
+
+        await Service.updateOne({_id},{
+            $set: {
+                name,
+                description,
+                address,
+                latitude,
+                longitude
+            }
+        })
+
+        res.redirect("/my-service")
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const adminDeleteMyService = async (req, res, next) => {
+    try {
+        const { idMyService:_id} = req.params;
+        console.log(_id)
+        await Service.findOneAndDelete({_id});
+        res.redirect("/new-service");
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+const adminServiceSchedule = async (req, res, next) => {
+    res.render("admin/service-schedule", {
+        pagina: 'Schedule',
+        header: true
+    })
 }
 
 
@@ -154,5 +249,9 @@ module.exports = {
     adminCreateNewService,
     adminAddImageService,
     adminStorageImageService,
-    adminMyService
+    adminMyService,
+    adminEditMyService,
+    adminSendEditMyService,
+    adminDeleteMyService,
+    adminServiceSchedule
 }
