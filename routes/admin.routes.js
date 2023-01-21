@@ -1,5 +1,5 @@
 const express = require('express');
-const { admin, adminNewService, adminCreateNewService, adminAddImageService, adminStorageImageService, adminMyService, adminEditMyService, adminSendEditMyService, adminDeleteMyService, adminServiceSchedule } = require('../controllers/admin.Controller.js');
+const { admin, adminNewService, adminCreateNewService, adminAddImageService, adminStorageImageService, adminMyService, adminEditMyService, adminSendEditMyService, adminDeleteMyService, adminServiceComment, adminSendServiceComment } = require('../controllers/admin.Controller.js');
 const isLoggedInAdmin = require("../middleware/isLoggedInAdmin");
 const uploadImg = require('../config/cloudinary.js');
 const router = express.Router();
@@ -29,6 +29,8 @@ router.post("/:idMyService/edit-my-service", isLoggedInAdmin, adminSendEditMySer
 router.get("/:idMyService/delete-my-service", isLoggedInAdmin, adminDeleteMyService);
 
 /** GET service-schedule page */
-router.get("/:idService/service-schedule", isLoggedInAdmin, adminServiceSchedule);
+router.get("/:idService/service-comment", isLoggedInAdmin, adminServiceComment);
+
+router.post("/:idService/service-comment", isLoggedInAdmin, adminSendServiceComment);
 
 module.exports = router;
