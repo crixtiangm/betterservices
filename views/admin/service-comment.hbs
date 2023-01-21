@@ -24,15 +24,19 @@
                 </div>   
             </form>
         </div>
-
+        {{#each commentsService}}
         <article class="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900 mt-5">
             <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
-                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">Jese Leos</p>
+                    {{#each _user}}
+                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">{{name}} {{surname}}</p>
+                    {{/each}}
                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
-                            title="February 12th, 2022">Feb. 12, 2022</time></p>
+                            title="{{createdAt}}">{{createdAt}}</time></p>
                 </div>
             </footer>
-            <p class="text-gray-500 dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
+            <p class="text-gray-500 dark:text-gray-400">{{comment}}</p>
         </article>
-</div>  
+        {{/each}}
+        
+</div> 
