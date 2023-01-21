@@ -1,6 +1,7 @@
 const { check,validationResult } = require('express-validator');
 const User = require('../models/User.model.js');
 const Service =  require('../models/Service.model.js');
+const Comment = require('../models/Comment.model.js')
 
 
 const admin = async (req, res) => {
@@ -234,11 +235,51 @@ const adminDeleteMyService = async (req, res, next) => {
 }
 
 
-const adminServiceSchedule = async (req, res, next) => {
-    res.render("admin/service-schedule", {
-        pagina: 'Schedule',
-        header: true
-    })
+const adminServiceComment = async (req, res, next) => {
+    const { idService: _id} = req.params
+    try {
+        const serviceSelected = await Service.findById({_id})
+        const { name, description, images, address, _user, ...serviceRest} = serviceSelected
+        
+        res.render("admin/service-comment", {
+            pagina: 'Comments',
+            header: true,
+            _id,
+            name,
+            description,
+            images,
+            address,
+            _user
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const adminSendServiceComment = async ( req, res, next ) => {
+    
+    const { idService: _id} = req.params;
+
+    const serviceSelected = await Service.findById({_id})
+    const { name, description, images, address, _user, ...serviceRest} = serviceSelected
+
+    await check('servicecomment').notEmpty().withMessage('Introduzca el comentario en la caja de texto').run(req);
+
+    let resultado = validationResult(req);
+
+        if(!resultado.isEmpty()){
+            return res.render( `admin/service-comment`, {
+                pagina: 'Comments',
+                header: true,
+                errores: resultado.array(),//Se mandan los errores como array 
+                _id,
+                name,
+                description,
+                images,
+                address,
+                _user
+            })
+        }
 }
 
 
@@ -253,5 +294,6 @@ module.exports = {
     adminEditMyService,
     adminSendEditMyService,
     adminDeleteMyService,
-    adminServiceSchedule
+    adminServiceComment,
+    adminSendServiceComment
 }
