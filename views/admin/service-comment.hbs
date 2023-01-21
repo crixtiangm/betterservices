@@ -1,0 +1,38 @@
+<div class="bg-white shadow-lg py-8 px-4 rounded-md mx-auto max-w-5xl my-10 md:px-10">
+    
+        <img class="w-full" src="{{images}}" alt="Image your service">
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">{{name}}</div>
+            <p class="text-gray-700 text-base">{{description}}</p>
+            <p class="text-gray-700 text-base mt-5">Address: {{address}}</p>
+        </div>
+        <div class="px-6 py-4">
+            <form action="/{{_id}}/service-comment" method="POST">
+                {{#if errores}}
+                    <div class="max-w-md mx-auto my-10">
+                        {{#each errores}}
+                        <p class="bg-red-600 text-white uppercase text-xs text-center p-2 mb-1 font-bold rounded-md">{{this.msg}}</p>
+                        {{/each}}
+                    </div>
+                {{/if}}
+                <p class="text-base font-semibold text-blue-600 transition-all">Add Comment/Questions</p> 
+                <textarea name="servicecomment" class="h-40 px-3 text-sm py-1 mt-5 outline-none border-gray-300 w-full resize-none border rounded-lg placeholder:text-sm" placeholder="Add your comments here"></textarea>  
+                    
+                <div class="flex justify-between mt-2"> 
+                    <input type="submit" class="h-12 w-[200px] bg-blue-500 text-sm text-white rounded-lg transition-all cursor-pointer hover:bg-blue-600" value="Submit comment">
+                    <p class="text-sm text-blue-900 ">Enter atleast 15 characters</p>
+                </div>   
+            </form>
+        </div>
+
+        <article class="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900 mt-5">
+            <footer class="flex justify-between items-center mb-2">
+                <div class="flex items-center">
+                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">Jese Leos</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
+                            title="February 12th, 2022">Feb. 12, 2022</time></p>
+                </div>
+            </footer>
+            <p class="text-gray-500 dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
+        </article>
+</div>  
