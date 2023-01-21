@@ -13,6 +13,29 @@ const admin = async (req, res) => {
     })
 }
 
+const adminSearch = (req, res, next) => {
+    res.render('admin/search',{
+        pagina: 'Home',
+        header: true
+    })
+}
+
+const adminSendSearch = async (req, res, next) => {
+    try {
+        
+    const { searchservice } = req.body;
+    const exp = new RegExp(searchservice);
+    const servicesSearch = await Service.find({ name:exp });
+    res.render('admin/search',{
+        pagina: 'Home',
+        header: true,
+        servicesSearch
+    });
+    } catch (error) {
+            console.log(error)
+    }
+}
+
 const adminNewService = (req, res) => {
     res.render("admin/new-service",{
         pagina: 'New Service',
@@ -240,7 +263,8 @@ const adminServiceComment = async (req, res, next) => {
     try {
         const serviceSelected = await Service.findById({_id})
         const { name, description, images, address, _user, ...serviceRest} = serviceSelected
-        
+
+        const commentsService = await Comment.find({_service: _id}).populate("_user","name surname")
         res.render("admin/service-comment", {
             pagina: 'Comments',
             header: true,
@@ -249,7 +273,8 @@ const adminServiceComment = async (req, res, next) => {
             description,
             images,
             address,
-            _user
+            _user,
+            commentsService
         })
     } catch (error) {
         console.log(error)
@@ -257,35 +282,99 @@ const adminServiceComment = async (req, res, next) => {
 }
 
 const adminSendServiceComment = async ( req, res, next ) => {
-    
-    const { idService: _id} = req.params;
+    try {
 
-    const serviceSelected = await Service.findById({_id})
-    const { name, description, images, address, _user, ...serviceRest} = serviceSelected
+        const { idService: _id} = req.params;
 
-    await check('servicecomment').notEmpty().withMessage('Introduzca el comentario en la caja de texto').run(req);
+        const serviceSelected = await Service.findById({_id})
+        const { name, description, images, address, _user, ...serviceRest} = serviceSelected
 
-    let resultado = validationResult(req);
+        await check('servicecomment').notEmpty().withMessage('Introduzca el comentario en la caja de texto').run(req);
+
+        let resultado = validationResult(req);
 
         if(!resultado.isEmpty()){
             return res.render( `admin/service-comment`, {
                 pagina: 'Comments',
-                header: true,
-                errores: resultado.array(),//Se mandan los errores como array 
-                _id,
-                name,
-                description,
-                images,
-                address,
-                _user
+                    header: true,
+                    errores: resultado.array(),//Se mandan los errores como array 
+                    _id,
+                    name,
+                    description,
+                    images,
+                    address,
+                    _user
             })
         }
+        const { servicecomment:comment } = req.body;
+        const { _id:userComment } = req.userRest._id; //EL usuario de la cuenta
+        const commentService = await Comment.create({
+            comment,
+            _service:_id,
+            _user: userComment
+        })
+
+        if(!commentService){
+            res.render('admin/service-comment',{
+                pagina: 'Comments',
+                header: true,
+                errores: [{msg: 'Ocurrio un error al guardar su comentario, intentelo mas tarde'}]
+            })
+        }
+
+        const commentsService = await Comment.find({_service: _id});
+
+        res.render('admin/service-comment',{
+            pagina: 'Comments',
+            header: true,
+            _id,
+            name,
+            description,
+            images,
+            address,
+            commentsService
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const adminCommentMyService = async (req,res,next) => {
+    const { _id:_user } = req.userRest._id;
+    try {
+        const myService = await Service.findOne({_user});
+        if(!myService){
+            res.render('admin/comment-in-serv',{
+                pagina: 'Comments',
+                header: true,
+                errores: [{msg: 'Ocurrio un error al cargar los comentarios'}]
+            })
+        }
+
+        const commentsService = await Comment.find({_service: myService._id}).populate("_user","name surname");
+
+        const { name, description, images, address, ...serviceRest} = myService;
+
+        res.render('admin/comment-in-serv',{
+            pagina: 'Comments My Service',
+            header: true,
+            name,
+            description,
+            images,
+            address,
+            commentsService
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 
 
 module.exports = {
     admin,
+    adminSearch,
+    adminSendSearch,
     adminNewService,
     adminCreateNewService,
     adminAddImageService,
@@ -295,5 +384,6 @@ module.exports = {
     adminSendEditMyService,
     adminDeleteMyService,
     adminServiceComment,
-    adminSendServiceComment
+    adminSendServiceComment,
+    adminCommentMyService
 }

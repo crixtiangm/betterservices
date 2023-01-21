@@ -1,0 +1,23 @@
+<div class="bg-white shadow-lg py-8 px-4 rounded-md mx-auto max-w-5xl my-10 md:px-10">
+    
+        <img class="w-full" src="{{images}}" alt="Image your service">
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">{{name}}</div>
+            <p class="text-gray-700 text-base">{{description}}</p>
+            <p class="text-gray-700 text-base mt-5">Address: {{address}}</p>
+        </div>
+        {{#each commentsService}}
+        <article class="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900 mt-5">
+            <footer class="flex justify-between items-center mb-2">
+                <div class="flex items-center">
+                    {{#each _user}}
+                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">{{name}} {{surname}}</p>
+                    {{/each}}
+                    <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
+                            title="{{createdAt}}">{{createdAt}}</time></p>
+                </div>
+            </footer>
+            <p class="text-gray-500 dark:text-gray-400">{{comment}}</p>
+        </article>
+        {{/each}}
+        
