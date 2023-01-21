@@ -1,11 +1,16 @@
 const express = require('express');
-const { admin, adminNewService, adminCreateNewService, adminAddImageService, adminStorageImageService, adminMyService, adminEditMyService, adminSendEditMyService, adminDeleteMyService, adminServiceComment, adminSendServiceComment } = require('../controllers/admin.Controller.js');
+const { admin, adminSearch, adminSendSearch, adminNewService, adminCreateNewService, adminAddImageService, adminStorageImageService, adminMyService, adminEditMyService, adminSendEditMyService, adminDeleteMyService, adminServiceComment, adminSendServiceComment, adminCommentMyService } = require('../controllers/admin.Controller.js');
 const isLoggedInAdmin = require("../middleware/isLoggedInAdmin");
 const uploadImg = require('../config/cloudinary.js');
 const router = express.Router();
 
 /* GET home page */
 router.get("/", isLoggedInAdmin, admin);
+
+/** GET Search page */
+router.get("/search", isLoggedInAdmin, adminSearch);
+
+router.post("/search", isLoggedInAdmin, adminSendSearch);
 
 /* GET service page */
 router.get("/new-service", isLoggedInAdmin, adminNewService);
@@ -32,5 +37,7 @@ router.get("/:idMyService/delete-my-service", isLoggedInAdmin, adminDeleteMyServ
 router.get("/:idService/service-comment", isLoggedInAdmin, adminServiceComment);
 
 router.post("/:idService/service-comment", isLoggedInAdmin, adminSendServiceComment);
+
+router.get("/comment-in-serv", isLoggedInAdmin, adminCommentMyService)
 
 module.exports = router;
